@@ -1,0 +1,5 @@
+node_modules/
+scripts/initial-admin.config.json
+.env
+.env.local
+.DS_Store

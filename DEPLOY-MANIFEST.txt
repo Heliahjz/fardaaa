@@ -1,0 +1,16 @@
+if .htaccess is missing after extraction, rename a copy of this file to .htaccess
+BUILD_ID: ONIVAL-2026.04-HOTFIX
+BUILD_TIMESTAMP: 2026-11-02T12:33:17.460Z
+FILE_COUNT: 10
+TOTAL_SIZE_BYTES: 2260818
+FILES:
+  _redirects | 19 bytes | SHA256: 6036983e5fc00f0169c9e939b1816ed771eee00e27f2fcc517b819041460b9ef
+  .htaccess | 2325 bytes | SHA256: 565113096d32cd4daa0c174cd6de70362cdf07b75f3e085323e58c9ed299387f
+  api/bale-webhook.php | 465 bytes | SHA256: 4f69e8995798cd134cdec5f50b6d6006bd47fd8c0f43493e1fcdfdc3929ead1b
+  api/common.php | 104406 bytes | SHA256: 69598e7aa0273938c6b4559754c4047bce4b9f190f0745a1b5a9bf97b86b2e74
+  api/index.php | 154901 bytes | SHA256: 4a06a2a2d619c5e44242b1790b0cd1b533ee162cec89ec972bc7103da3f0bcb8
+  api/seed.php | 30145 bytes | SHA256: 3e348e7cdf2415d948de1fa1fd3c11557c85564b523c8eb4fd6a7a313f6e32c6
+  api/webhook.php | 55752 bytes | SHA256: c9a65bc35e9930540d54ec39b1db26928a3e4d4974ced7f8c72e5e1efa23f8ea
+  assets/index-BbKJHbuF.css | 138557 bytes | SHA256: cd0efca9e2dd553db940c305c608c94382a6f9ec57ab18e1a530fe3aca25ef2a
+  assets/index-DboXkyyK.js | 1770635 bytes | SHA256: 0e2238532f5975ec0fb8c58a596dc3183ff1be7b848f461528742ba1957382ed
+  index.html | 3613 bytes | SHA256: d602f32398a679d4157bd3adb346eb3438aa2b88e14d713cb2c0cab8534e7737

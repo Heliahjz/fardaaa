@@ -1,0 +1,67 @@
+# ==============================================================================
+# ONIVAL Security & Hardening Configuration for Apache / LiteSpeed / cPanel
+# ==============================================================================
+
+# 1. Prevent Directory Browsing
+Options -Indexes
+
+# 2. Block direct HTTP access to dotfiles
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# 3. Block direct HTTP access to sensitive extensions: .log, .bak, .sql, .zip, .env, .ini, .lock, etc.
+<FilesMatch "\.(log|bak|sql|zip|env.*|ini|conf|dist|sh|lock|yml|yaml|ts|tsx|map)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Block all .json files except allowed web manifest
+<FilesMatch "\.json$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<Files "manifest.json">
+    Order allow,deny
+    Allow from all
+</Files>
+
+<Files "site.webmanifest">
+    Order allow,deny
+    Allow from all
+</Files>
+
+# 4. Security Headers
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# 5. API Backend & SPA URL Rewriting
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Deny direct access to private server-data directory (defense-in-depth)
+    RewriteRule ^server-data/ - [F,L]
+
+    # Technical SEO & feed routes
+    RewriteRule ^sitemap\.xml$ api/index.php?path=/sitemap.xml [QSA,L]
+    RewriteRule ^robots\.txt$ api/index.php?path=/robots.txt [QSA,L]
+    RewriteRule ^torob/products$ api/index.php?path=/api/torob/products [QSA,L]
+    RewriteRule ^emalls/products$ api/index.php?path=/api/emalls/products [QSA,L]
+
+    # Route all /api and /api/* requests to PHP backend
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^api(?:/(.*))?$ api/index.php?path=$1 [QSA,L]
+
+    # SPA Fallback for all other frontend routes
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . index.html [L]
+</IfModule>
